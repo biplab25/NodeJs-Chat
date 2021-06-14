@@ -1,0 +1,23 @@
+extends base
+block content
+   .msger
+        header.msger-header
+            .msger-header-title
+            i.fas.fa-comment-alt
+            |  SimpleChat
+            .msger-header-options
+            span
+                i.fas.fa-cog
+        main.msger-chat
+        each chat in chats
+            .msg.left-msg
+            .msg-img(style='background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)')
+            .msg-bubble
+                .msg-info
+                .msg-info-name #{chat.messegername}
+                .msg-info-time 12:45
+                .msg-text
+                | #{chat.messege} &#x1F604;
+        form.msger-inputarea(method='POST' action='/chat')
+            input.msger-input(type='text' name='messege' placeholder='Enter your message...')
+            button.msger-send-btn(type='submit') Send

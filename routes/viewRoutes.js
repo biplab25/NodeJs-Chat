@@ -1,0 +1,15 @@
+const express = require('express');
+const viewsController=require('../controllers/viewsController');
+const authContoller=require('../controllers/authController');
+const router=express.Router();
+//router.use(authContoller.isLoggedIn);
+router.get('/',viewsController.getOverview);
+router.get('/login',viewsController.getLoginForm);
+router.get('/signup',viewsController.getSignUpForm);
+router.get('/subscribe',viewsController.getSubscribe);
+router.get('/video',viewsController.yourVideo);
+router.get('/upload',authContoller.isLoggedIn,viewsController.uploadVideo);
+router.get('/chat',authContoller.isLoggedIn,viewsController.getChat);
+router.get('/forgotpassword',viewsController.getforgotPassword);
+router.get('/resetPassword/:token',viewsController.getresetPassword);
+module.exports=router;

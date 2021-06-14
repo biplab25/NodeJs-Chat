@@ -1,0 +1,24 @@
+.nav
+    ul.nav_ul
+      li
+        a.nav-link(href='/') Home
+      if user
+        li
+          a.nav-link(href='/chat') Chat
+        li
+          a.nav-link(href='#') Logout
+        li   
+          a.nav__el(href='/me')
+            img.nav__user-img(src=`/img/users/${user.photo}` alt=`Photo of ${user.username}`)
+        li
+          a.nav-link(href='/upload') Upload         
+      else     
+        li
+          a.nav-link(href='/forgotpassword') Forgot Password 
+        li
+          a.nav-link(href='/login') LogIn  
+        li
+          a.nav-link(href='/signup') SignUp
+      li
+        a.nav-link(href='#') Contact Us
+       

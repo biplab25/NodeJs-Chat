@@ -1,0 +1,14 @@
+extends base
+block content
+    .cards
+        each movie in movies 
+            .flip-card 
+                img(src=`/uploads/${movie.avatar}` alt='Girl in a jacket' width='400' height='300')
+                h1#pugmoviename Title - #{movie.moviename}
+                h1#pugdescription Description - #{movie.description}
+                h1#pugduration Duration - #{movie.duration}h
+
+                        
+                                                                                                                    
+                    
+                
