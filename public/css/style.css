@@ -1,13 +1,16 @@
 /* This first section is a simple "reset". It allows the navbar to push up against the top of the browser window with no white space around it. This code also sets the default font for your whole page. Put it at the very top of your css page.  */
-body{
-  background-image: url('/img/movie.jpg');
+body {
+  /* This rule is a bit redundant now as background-image is handled by the 
+     body selector further down (which uses variables) and by the dark mode media query. 
+     Keeping it as a very basic fallback. */
+  background-image: url('/img/movie.jpg'); 
 }
 
 * {
   box-sizing: border-box;
 }
 
-html, body, div, p, ul, li,h1 {
+html, body, div, p, ul, li, h1 { /* Added space before h1 for consistency */
     margin: 0;
     padding: 0;
     border: 0;
@@ -15,12 +18,13 @@ html, body, div, p, ul, li,h1 {
     font: inherit;
     vertical-align: baseline;
     font-family: 'Roboto', sans-serif;
-    font-weight: 00;
+    font-weight: normal; /* Corrected from 00 to normal, assuming default weight */
+    color: var(--text-color); /* Ensuring all base elements inherit themed text color */
   }
   
   /* This class is applied to the containing div <div class="nav"> and is used to set the background color and height of the navbar */
   .nav {
-    background: rgb(26, 3, 15);
+    background: var(--nav-bg); /* MODIFIED */
     height: 60px; /* set same as height & line-height below */
     position: relative;
   }
@@ -36,6 +40,7 @@ html, body, div, p, ul, li,h1 {
     left: 40px;
     top: 20px;
     font-size: 150%;
+    color: var(--nav-link-color); /* MODIFIED */
 }
 
   /* This rule centers the nav items verticaly in the bar with the height and line height properties. Spacing between the nav items is controlled by setting right and left padding.  */
@@ -50,45 +55,47 @@ html, body, div, p, ul, li,h1 {
   
   /* :hover allows you change the background color of the nav items when you mouse over them. Play around with the transition value to change the speed of the hover transition. */
   .nav li:hover {
-    background: red;
+    background: var(--link-color); /* MODIFIED - hover color handled by media query for dark mode */
     transition: background .3s;
   }
   
   /* This rule is applied to the link <a> tag. It lets you turn off the link underline and set the link text color. */
   .nav-link {
-    color: rgb(255, 255, 255);
+    color: var(--nav-link-color); /* MODIFIED */
     text-decoration: none;
   }
 
-  h1{
-    color: #fff;
+  h1{ /* This h1 rule is somewhat redundant due to the reset above, but if it's meant to be specifically white... */
+    color: var(--text-color); /* MODIFIED - General text color. Original was #fff */
   }
 
   /*Login css*/
   h2 {
     font-weight:300;
     text-align:center;
+    color: var(--text-color); /* MODIFIED */
   }
   p {
     position: relative;
+    color: var(--text-color); /* MODIFIED */
   }
   a,
   a:link,
   a:visited,
   a:active {
-    color:#ffffff;
+    color: var(--link-color); /* MODIFIED */
     transition: all 0.2s ease;
     
   }
   #login-form-wrap {
-    background-color:#171c2a;
+    background-color: var(--login-form-wrap-bg); /* MODIFIED */
     width: 35%;
     margin: 30px auto;
     text-align: center;
     padding:20px 0 0 0;
     border-radius: 4px;
     box-shadow: 0px 30px 50px 0px rgba(0, 0, 0, 0.2);
-    color: white;
+    color: var(--text-color); /* MODIFIED */
   }
   #login-form {
     padding:0 60px;
@@ -111,22 +118,22 @@ html, body, div, p, ul, li,h1 {
     width: 100%;
     padding: 0 0 0 10px;
     margin-top: 10px;
-    color: #8a8b8e;
-    border: 1px solid #c2c0ca;
+    color: var(--input-text-color); /* MODIFIED */
+    border: 1px solid var(--login-input-border-color); /* MODIFIED */
     font-style: normal;
     font-size: 16px;
     appearance: none;
     position: relative;
     display: inline-block;
-    background: none;
+    background: var(--input-bg); /* MODIFIED */
     
   } 
   
   input[type="submit"] {
     border: none;
     display:block;
-    background-color:#52d794;
-    color: #fff;
+    background-color: var(--button-bg); /* MODIFIED */
+    color: var(--button-text-color); /* MODIFIED */
     font-weight: bold;
     text-transform:uppercase;
     cursor: pointer;
@@ -138,9 +145,13 @@ html, body, div, p, ul, li,h1 {
     text-align: center;
     margin-top: 10px;
   }
+   /* General hover for submit buttons, dark mode handled in media query */
+  input[type="submit"]:hover {
+    filter: brightness(90%); 
+  }
   #create-account-wrap {
-    background-color:#eeedf1;
-    color:#8a8b8e;
+    background-color: var(--create-account-bg); /* MODIFIED */
+    color: var(--create-account-text-color); /* MODIFIED */
     font-size:14px;
     width:100%;
     padding:10px 0;
@@ -169,9 +180,9 @@ html, body, div, p, ul, li,h1 {
   }  
 
   .flip-card {
-    background-color: transparent;
+    background-color: var(--card-bg); /* MODIFIED */
     width: 400px;
-    border: 1px solid #f1f1f1;
+    border: 1px solid var(--border); /* MODIFIED */
     perspective: 1000px; /* Remove this if you don't want the 3D effect */
     margin-top: 50px;
     height: auto;
@@ -203,14 +214,14 @@ html, body, div, p, ul, li,h1 {
   
   /* Style the front side (fallback if image is missing) */
   .flip-card-front {
-    background-color: #bbb;
-    color: black;
+    background-color: var(--flip-card-front-bg); /* MODIFIED */
+    color: var(--flip-card-front-text-color); /* MODIFIED */
   }
   
   /* Style the back side */
   .flip-card-back {
-    background-color: rgb(252, 251, 255);
-    color: rgb(0, 0, 0);
+    background-color: var(--flip-card-back-bg); /* MODIFIED */
+    color: var(--flip-card-back-text-color); /* MODIFIED */
     transform: rotateY(180deg);
   }
 
@@ -222,7 +233,7 @@ html, body, div, p, ul, li,h1 {
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
     z-index: 9999;
-    color: #fff;
+    color: var(--button-text-color); /* MODIFIED */
     font-size: 1.8rem;
     font-weight: 400;
     text-align: center;
@@ -231,12 +242,13 @@ html, body, div, p, ul, li,h1 {
     padding: 1.6rem 15rem;
     -webkit-box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
     box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
+    /* Background color is specific to alert type */
   }
   .alert--success {
-    background-color: #20bf6b;
+    background-color: var(--alert-success-bg); /* MODIFIED */
   }
   .alert--error {
-    background-color: #eb4d4b;
+    background-color: var(--alert-error-bg); /* MODIFIED */
   }
 
   /*Details*/
@@ -258,11 +270,13 @@ html, body, div, p, ul, li,h1 {
   border: none;
   cursor: pointer;
   margin-top: 50px;
+  background-color: var(--button-bg); /* ADDED default button styling */
+  color: var(--button-text-color); /* ADDED default button styling */
 }
 
 .btn--green {
-  background-color: #55c57a;
-  color: #fff;
+  background-color: var(--btn-green-bg); /* MODIFIED */
+  color: var(--button-text-color); /* MODIFIED */
 }
 
 /* Create three columns of equal width */
@@ -275,11 +289,12 @@ html, body, div, p, ul, li,h1 {
 /* Style the list */
 .price {
   list-style-type: none;
-  border: 1px solid #eee;
+  border: 1px solid var(--border); /* MODIFIED */
   margin: 0;
   padding: 0;
   -webkit-transition: 0.3s;
   transition: 0.3s;
+  background-color: var(--card-bg); /* ADDED */
 }
 
 /* Add shadows on hover */
@@ -289,31 +304,32 @@ html, body, div, p, ul, li,h1 {
 
 /* Pricing header */
 .price .header {
-  background-color: #111;
-  color: white;
+  background-color: var(--price-header-bg); /* MODIFIED */
+  color: var(--button-text-color); /* MODIFIED */
   font-size: 25px;
 }
 
 /* List items */
 .price li {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border); /* MODIFIED */
   padding: 20px;
   text-align: center;
-  background-color: #bbb;
+  background-color: var(--price-li-bg); /* MODIFIED */
   font-size: 20px;
+  color: var(--text-color); /* ADDED */
 }
 
 /* Grey list item */
 .price .grey {
-  background-color: #eee;
+  background-color: var(--price-li-grey-bg); /* MODIFIED */
   font-size: 28px;
 }
 
 /* The "Sign Up" button */
-.button {
-  background-color: #04AA6D;
+.button { /* This is a specific button style */
+  background-color: var(--signup-btn-bg); /* MODIFIED */
   border: none;
-  color: white;
+  color: var(--button-text-color); /* MODIFIED */
   padding: 10px 25px;
   text-align: center;
   text-decoration: none;
@@ -343,18 +359,21 @@ html, body, div, p, ul, li,h1 {
 
 /* CHOOSE FILE  */
 #myfile{
-  background-color: blueviolet;
+  background-color: var(--myfile-bg); /* MODIFIED */
+  color: var(--button-text-color); /* MODIFIED */
   width: 350px;
   margin-left: 50px;
   border-radius: 25px;
+  padding: 10px; /* Added for better appearance */
+  text-align: center; /* Added for better text alignment */
 }
 
 /*overview */
 #pugmoviename{
   width:400px;
   height: auto;
-  background-color: #171c2a;
-  color: #eeedf1;
+  background-color: var(--pug-item-bg); /* MODIFIED */
+  color: var(--pug-item-text-color); /* MODIFIED */
   padding: 8px;
   font-size: 20px;
 }
@@ -362,8 +381,8 @@ html, body, div, p, ul, li,h1 {
 #pugdescription{
   width:400px;
   height: auto;
-  background-color: #171c2a;
-  color: #eeedf1;
+  background-color: var(--pug-item-bg); /* MODIFIED */
+  color: var(--pug-item-text-color); /* MODIFIED */
   padding: 8px;
   font-size: 20px;
 } 
@@ -371,8 +390,8 @@ html, body, div, p, ul, li,h1 {
 #pugduration {
   width:400px;
   height: auto;
-  background-color: #052519;
-  color: #eeedf1;
+  background-color: var(--pug-duration-bg); /* MODIFIED */
+  color: var(--pug-item-text-color); /* MODIFIED */
   font-size: 20px;
   padding: 8px;
   padding-left: 110px;
@@ -380,13 +399,283 @@ html, body, div, p, ul, li,h1 {
 
 /*CHAT*/
 :root {
-  --body-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  --msger-bg: #fff;
-  --border: 2px solid #ddd;
-  --left-msg-bg: #ececec;
-  --right-msg-bg: #579ffb;
+  /* Light Theme Colors */
+  --body-bg-light: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --msger-bg-light: #fff;
+  --border-light: 2px solid #ddd;
+  --left-msg-bg-light: #ececec;
+  --right-msg-bg-light: #579ffb;
+  --text-color-light: #333;
+  --link-color-light: #007bff;
+  --header-bg-light: #eee;
+  --header-text-light: #666;
+  --input-bg-light: #ddd;
+  --input-text-light: #8a8b8e;
+  --button-bg-light: #52d794;
+  --button-text-light: #fff;
+  --card-bg-light: #fff;
+  --card-text-light: #000;
+  --nav-bg-light: rgb(26, 3, 15);
+  --nav-link-color-light: rgb(255, 255, 255);
+  --login-form-wrap-bg-light: #171c2a; /* This is already dark, consider if it needs a light version */
+  --login-input-border-color-light: #c2c0ca;
+  --create-account-bg-light: #eeedf1;
+  --create-account-text-color-light: #8a8b8e;
+  --flip-card-front-bg-light: #bbb;
+  --flip-card-front-text-light: black;
+  --flip-card-back-bg-light: rgb(252, 251, 255);
+  --flip-card-back-text-light: rgb(0, 0, 0);
+  --alert-success-bg-light: #20bf6b;
+  --alert-error-bg-light: #eb4d4b;
+  --btn-green-bg-light: #55c57a;
+  --price-header-bg-light: #111;
+  --price-li-bg-light: #bbb;
+  --price-li-grey-bg-light: #eee;
+  --signup-btn-bg-light: #04AA6D;
+  --pug-item-bg-light: #171c2a; /* Also already dark */
+  --pug-item-text-color-light: #eeedf1;
+  --pug-duration-bg-light: #052519; /* Also already dark */
+  --msger-header-bg-light: #eee;
+  --msger-header-text-light: #666;
+  --msger-chat-bg-light: #fcfcfe;
+  --msger-inputarea-bg-light: #eee;
+  --msger-input-bg-light: #ddd;
+  --msger-send-btn-bg-light: rgb(0, 196, 65);
+  --myfile-bg-light: blueviolet;
+
+
+  /* Dark Theme Colors */
+  --dm-body-bg: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
+  --dm-msger-bg: #2c2c2c;
+  --dm-border: 2px solid #555;
+  --dm-left-msg-bg: #3a3a3a;
+  --dm-right-msg-bg: #007bff;
+  --dm-text-color: #f0f0f0;
+  --dm-link-color: #1e90ff;
+  --dm-header-bg: #2a2a2a;
+  --dm-header-text: #ccc;
+  --dm-input-bg: #3a3a3a;
+  --dm-input-text: #aaaaaa;
+  --dm-button-bg: #42a063; /* Darker green */
+  --dm-button-text: #fff;
+  --dm-card-bg: #2c2c2c;
+  --dm-card-text: #f0f0f0;
+  --dm-nav-bg: rgb(10, 10, 10);
+  --dm-nav-link-color: rgb(220, 220, 220);
+  --dm-login-form-wrap-bg: #222831;
+  --dm-login-input-border-color: #555555;
+  --dm-create-account-bg: #3a3a3a;
+  --dm-create-account-text-color: #aaaaaa;
+  --dm-flip-card-front-bg: #444;
+  --dm-flip-card-front-text: #ddd;
+  --dm-flip-card-back-bg: #333;
+  --dm-flip-card-back-text: #eee;
+  --dm-alert-success-bg: #1a9a54;
+  --dm-alert-error-bg: #c43b39;
+  --dm-btn-green-bg: #42a063;
+  --dm-price-header-bg: #222;
+  --dm-price-li-bg: #444;
+  --dm-price-li-grey-bg: #555;
+  --dm-signup-btn-bg: #038c5a;
+  --dm-pug-item-bg: #222831;
+  --dm-pug-item-text-color: #dddddd;
+  --dm-pug-duration-bg: #031a13;
+  --dm-msger-header-bg: #3a3a3a; /* Adjusted from #4a4a4a for better fit */
+  --dm-msger-header-text: #ccc;
+  --dm-msger-chat-bg: #2a2a2a;
+  --dm-msger-inputarea-bg: #3a3a3a; /* Adjusted from #4a4a4a */
+  --dm-msger-input-bg: #5a5a5a;
+  --dm-msger-send-btn-bg: rgb(0, 150, 50);
+  --dm-myfile-bg: darkslateblue;
+
+  /* Default to light theme variables */
+  --body-bg: var(--body-bg-light);
+  --msger-bg: var(--msger-bg-light);
+  --border: var(--border-light);
+  --left-msg-bg: var(--left-msg-bg-light);
+  --right-msg-bg: var(--right-msg-bg-light);
+  --text-color: var(--text-color-light);
+  --link-color: var(--link-color-light);
+  --header-bg: var(--header-bg-light);
+  --header-text: var(--header-text-light);
+  --input-bg: var(--input-bg-light);
+  --input-text-color: var(--input-text-light); /* Renamed from --input-text for clarity */
+  --button-bg: var(--button-bg-light);
+  --button-text-color: var(--button-text-light); /* Renamed from --button-text for clarity */
+  --card-bg: var(--card-bg-light);
+  --card-text-color: var(--card-text-light); /* Renamed from --card-text for clarity */
+  --nav-bg: var(--nav-bg-light);
+  --nav-link-color: var(--nav-link-color-light);
+  --login-form-wrap-bg: var(--login-form-wrap-bg-light);
+  --login-input-border-color: var(--login-input-border-color-light);
+  --create-account-bg: var(--create-account-bg-light);
+  --create-account-text-color: var(--create-account-text-color-light);
+  --flip-card-front-bg: var(--flip-card-front-bg-light);
+  --flip-card-front-text-color: var(--flip-card-front-text-light); /* Renamed for clarity */
+  --flip-card-back-bg: var(--flip-card-back-bg-light);
+  --flip-card-back-text-color: var(--flip-card-back-text-light); /* Renamed for clarity */
+  --alert-success-bg: var(--alert-success-bg-light);
+  --alert-error-bg: var(--alert-error-bg-light);
+  --btn-green-bg: var(--btn-green-bg-light);
+  --price-header-bg: var(--price-header-bg-light);
+  --price-li-bg: var(--price-li-bg-light);
+  --price-li-grey-bg: var(--price-li-grey-bg-light);
+  --signup-btn-bg: var(--signup-btn-bg-light);
+  --pug-item-bg: var(--pug-item-bg-light);
+  --pug-item-text-color: var(--pug-item-text-color-light);
+  --pug-duration-bg: var(--pug-duration-bg-light);
+  --msger-header-bg: var(--msger-header-bg-light);
+  --msger-header-text-color: var(--msger-header-text-light); /* Renamed for clarity */
+  --msger-chat-bg: var(--msger-chat-bg-light);
+  --msger-inputarea-bg: var(--msger-inputarea-bg-light);
+  --msger-input-bg: var(--msger-input-bg-light);
+  --msger-send-btn-bg: var(--msger-send-btn-bg-light);
+  --myfile-bg: var(--myfile-bg-light);
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Remap default variables to dark theme variables */
+    --body-bg: var(--dm-body-bg);
+    --msger-bg: var(--dm-msger-bg);
+    --border: var(--dm-border);
+    --left-msg-bg: var(--dm-left-msg-bg);
+    --right-msg-bg: var(--dm-right-msg-bg);
+    --text-color: var(--dm-text-color);
+    --link-color: var(--dm-link-color);
+    --header-bg: var(--dm-header-bg);
+    --header-text: var(--dm-header-text);
+    --input-bg: var(--dm-input-bg);
+    --input-text-color: var(--dm-input-text);
+    --button-bg: var(--dm-button-bg);
+    --button-text-color: var(--dm-button-text);
+    --card-bg: var(--dm-card-bg);
+    --card-text-color: var(--dm-card-text);
+    --nav-bg: var(--dm-nav-bg);
+    --nav-link-color: var(--dm-nav-link-color);
+    --login-form-wrap-bg: var(--dm-login-form-wrap-bg);
+    --login-input-border-color: var(--dm-login-input-border-color);
+    --create-account-bg: var(--dm-create-account-bg);
+    --create-account-text-color: var(--dm-create-account-text-color);
+    --flip-card-front-bg: var(--dm-flip-card-front-bg);
+    --flip-card-front-text-color: var(--dm-flip-card-front-text);
+    --flip-card-back-bg: var(--dm-flip-card-back-bg);
+    --flip-card-back-text-color: var(--dm-flip-card-back-text);
+    --alert-success-bg: var(--dm-alert-success-bg);
+    --alert-error-bg: var(--dm-alert-error-bg);
+    --btn-green-bg: var(--dm-btn-green-bg);
+    --price-header-bg: var(--dm-price-header-bg);
+    --price-li-bg: var(--dm-price-li-bg);
+    --price-li-grey-bg: var(--dm-price-li-grey-bg);
+    --signup-btn-bg: var(--dm-signup-btn-bg);
+    --pug-item-bg: var(--dm-pug-item-bg);
+    --pug-item-text-color: var(--dm-pug-item-text-color);
+    --pug-duration-bg: var(--dm-pug-duration-bg);
+    --msger-header-bg: var(--dm-msger-header-bg);
+    --msger-header-text-color: var(--dm-msger-header-text);
+    --msger-chat-bg: var(--dm-msger-chat-bg);
+    --msger-inputarea-bg: var(--dm-msger-inputarea-bg);
+    --msger-input-bg: var(--dm-msger-input-bg);
+    --msger-send-btn-bg: var(--dm-msger-send-btn-bg);
+    --myfile-bg: var(--dm-myfile-bg);
+  }
+
+  body {
+    /* Update background image for dark mode */
+    background-image: url('/img/movie-dark.jpg'); /* Consider a darker or neutral image, or none */
+  }
+
+  /* Dark mode specific scrollbar styles */
+  .msger-chat::-webkit-scrollbar-track {
+    background: #2c2c2c; 
+  }
+  .msger-chat::-webkit-scrollbar-thumb {
+    background: #555;
+  }
+  
+  /* Dark mode hover effects if needed */
+  .nav li:hover {
+    background: var(--dm-link-color); /* Example: use a dark-theme appropriate hover color */
+  }
+
+  input[type="submit"]:hover {
+    /* Example: Slightly lighten dark buttons on hover. You might need a specific variable for this. */
+    filter: brightness(110%); 
+  }
+  .msger-send-btn:hover {
+    background: rgb(0, 130, 40); /* Specific darker hover for this button */
+  }
+}
+
+/* Manual Dark Mode Toggle Class */
+body.dark-mode {
+  /* Remap default variables to dark theme variables */
+  --body-bg: var(--dm-body-bg);
+  --msger-bg: var(--dm-msger-bg);
+  --border: var(--dm-border);
+  --left-msg-bg: var(--dm-left-msg-bg);
+  --right-msg-bg: var(--dm-right-msg-bg);
+  --text-color: var(--dm-text-color);
+  --link-color: var(--dm-link-color);
+  --header-bg: var(--dm-header-bg);
+  --header-text: var(--dm-header-text);
+  --input-bg: var(--dm-input-bg);
+  --input-text-color: var(--dm-input-text);
+  --button-bg: var(--dm-button-bg);
+  --button-text-color: var(--dm-button-text);
+  --card-bg: var(--dm-card-bg);
+  --card-text-color: var(--dm-card-text);
+  --nav-bg: var(--dm-nav-bg);
+  --nav-link-color: var(--dm-nav-link-color);
+  --login-form-wrap-bg: var(--dm-login-form-wrap-bg);
+  --login-input-border-color: var(--dm-login-input-border-color);
+  --create-account-bg: var(--dm-create-account-bg);
+  --create-account-text-color: var(--dm-create-account-text-color);
+  --flip-card-front-bg: var(--dm-flip-card-front-bg);
+  --flip-card-front-text-color: var(--dm-flip-card-front-text);
+  --flip-card-back-bg: var(--dm-flip-card-back-bg);
+  --flip-card-back-text-color: var(--dm-flip-card-back-text);
+  --alert-success-bg: var(--dm-alert-success-bg);
+  --alert-error-bg: var(--dm-alert-error-bg);
+  --btn-green-bg: var(--dm-btn-green-bg);
+  --price-header-bg: var(--dm-price-header-bg);
+  --price-li-bg: var(--dm-price-li-bg);
+  --price-li-grey-bg: var(--dm-price-li-grey-bg);
+  --signup-btn-bg: var(--dm-signup-btn-bg);
+  --pug-item-bg: var(--dm-pug-item-bg);
+  --pug-item-text-color: var(--dm-pug-item-text-color);
+  --pug-duration-bg: var(--dm-pug-duration-bg);
+  --msger-header-bg: var(--dm-msger-header-bg);
+  --msger-header-text-color: var(--dm-msger-header-text);
+  --msger-chat-bg: var(--dm-msger-chat-bg);
+  --msger-inputarea-bg: var(--dm-msger-inputarea-bg);
+  --msger-input-bg: var(--dm-msger-input-bg);
+  --msger-send-btn-bg: var(--dm-msger-send-btn-bg);
+  --myfile-bg: var(--dm-myfile-bg);
+
+  /* Specific dark mode overrides, similar to the media query */
+  background-image: url('/img/movie-dark.jpg'); /* Or none if preferred */
+
+  /* Dark mode specific scrollbar styles */
+  .msger-chat::-webkit-scrollbar-track {
+    background: #2c2c2c; 
+  }
+  .msger-chat::-webkit-scrollbar-thumb {
+    background: #555;
+  }
+  
+  /* Dark mode hover effects if needed */
+  .nav li:hover {
+    background: var(--dm-link-color); 
+  }
+
+  input[type="submit"]:hover {
+    filter: brightness(110%); 
+  }
+  .msger-send-btn:hover {
+    background: rgb(0, 130, 40); 
+  }
+}
 
 *,
 *:before,
@@ -395,6 +684,11 @@ html, body, div, p, ul, li,h1 {
   padding: 0;
   box-sizing: inherit;
 }
+body { /* General body styles */
+  background: var(--body-bg);
+  color: var(--text-color);
+}
+
 .msger {
   display: flex;
   flex-flow: column wrap;
@@ -414,23 +708,24 @@ html, body, div, p, ul, li,h1 {
   justify-content: space-between;
   padding: 10px;
   border-bottom: var(--border);
-  background: #eee;
-  color: #666;
+  background: var(--msger-header-bg);
+  color: var(--msger-header-text-color);
 }
 
 .msger-chat {
   flex: 1;
   overflow-y: auto;
   padding: 10px;
+  background-color: var(--msger-chat-bg); /* Added variable */
 }
 .msger-chat::-webkit-scrollbar {
   width: 6px;
 }
 .msger-chat::-webkit-scrollbar-track {
-  background: #ddd;
+  background: var(--input-bg); /* MODIFIED - For light theme scrollbar track, dark is in media query */
 }
 .msger-chat::-webkit-scrollbar-thumb {
-  background: #bdbdbd;
+  background: var(--border); /* MODIFIED - For light theme scrollbar thumb, dark is in media query */
 }
 .msg {
   display: flex;
@@ -444,7 +739,7 @@ html, body, div, p, ul, li,h1 {
   width: 50px;
   height: 50px;
   margin-right: 10px;
-  background: #ddd;
+  background: var(--input-bg); /* MODIFIED - Placeholder image background */
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -455,6 +750,7 @@ html, body, div, p, ul, li,h1 {
   padding: 15px;
   border-radius: 15px;
   background: var(--left-msg-bg);
+  color: var(--text-color); /* Added for message text */
 }
 .msg-info {
   display: flex;
@@ -479,7 +775,7 @@ html, body, div, p, ul, li,h1 {
 }
 .right-msg .msg-bubble {
   background: var(--right-msg-bg);
-  color: #fff;
+  color: var(--button-text-color); /* Assuming right message bubble text is like button text */
   border-bottom-right-radius: 0;
 }
 .right-msg .msg-img {
@@ -490,57 +786,56 @@ html, body, div, p, ul, li,h1 {
   display: flex;
   padding: 10px;
   border-top: var(--border);
-  background: #eee;
+  background: var(--msger-inputarea-bg); /* Variable anwenden */
 }
 .msger-inputarea * {
   padding: 10px;
   border: none;
   border-radius: 3px;
   font-size: 1em;
+  color: var(--input-text-color); /* Textfarbe für Inputs hier */
 }
 .msger-input {
   flex: 1;
-  background: #ddd;
+  background: var(--msger-input-bg); /* Variable anwenden */
 }
 .msger-send-btn {
   margin-left: 10px;
-  background: rgb(0, 196, 65);
-  color: #fff;
+  background: var(--msger-send-btn-bg); /* Variable anwenden */
+  color: var(--button-text-color); /* Variable anwenden */
   font-weight: bold;
   cursor: pointer;
   transition: background 0.23s;
 }
 .msger-send-btn:hover {
-  background: rgb(0, 180, 50);
+  background: rgb(0, 180, 50); /* Consider a dark mode hover variable too */
 }
 
-.msger-chat {
-  background-color: #fcfcfe;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23dddddd' fill-opacity='0.4'%3E%3Cpath d='M24.37 16c.2.65.39 1.32.54 2H21.17l1.17 2.34.45.9-.24.11V28a5 5 0 0 1-2.23 8.94l-.02.06a8 8 0 0 1-7.75 6h-20a8 8 0 0 1-7.74-6l-.02-.06A5 5 0 0 1-17.45 28v-6.76l-.79-1.58-.44-.9.9-.44.63-.32H-20a23.01 23.01 0 0 1 44.37-2zm-36.82 2a1 1 0 0 0-.44.1l-3.1 1.56.89 1.79 1.31-.66a3 3 0 0 1 2.69 0l2.2 1.1a1 1 0 0 0 .9 0l2.21-1.1a3 3 0 0 1 2.69 0l2.2 1.1a1 1 0 0 0 .9 0l2.21-1.1a3 3 0 0 1 2.69 0l2.2 1.1a1 1 0 0 0 .86.02l2.88-1.27a3 3 0 0 1 2.43 0l2.88 1.27a1 1 0 0 0 .85-.02l3.1-1.55-.89-1.79-1.42.71a3 3 0 0 1-2.56.06l-2.77-1.23a1 1 0 0 0-.4-.09h-.01a1 1 0 0 0-.4.09l-2.78 1.23a3 3 0 0 1-2.56-.06l-2.3-1.15a1 1 0 0 0-.45-.11h-.01a1 1 0 0 0-.44.1L.9 19.22a3 3 0 0 1-2.69 0l-2.2-1.1a1 1 0 0 0-.45-.11h-.01a1 1 0 0 0-.44.1l-2.21 1.11a3 3 0 0 1-2.69 0l-2.2-1.1a1 1 0 0 0-.45-.11h-.01zm0-2h-4.9a21.01 21.01 0 0 1 39.61 0h-2.09l-.06-.13-.26.13h-32.31zm30.35 7.68l1.36-.68h1.3v2h-36v-1.15l.34-.17 1.36-.68h2.59l1.36.68a3 3 0 0 0 2.69 0l1.36-.68h2.59l1.36.68a3 3 0 0 0 2.69 0L2.26 23h2.59l1.36.68a3 3 0 0 0 2.56.06l1.67-.74h3.23l1.67.74a3 3 0 0 0 2.56-.06zM-13.82 27l16.37 4.91L18.93 27h-32.75zm-.63 2h.34l16.66 5 16.67-5h.33a3 3 0 1 1 0 6h-34a3 3 0 1 1 0-6zm1.35 8a6 6 0 0 0 5.65 4h20a6 6 0 0 0 5.66-4H-13.1z'/%3E%3Cpath id='path6_fill-copy' d='M284.37 16c.2.65.39 1.32.54 2H281.17l1.17 2.34.45.9-.24.11V28a5 5 0 0 1-2.23 8.94l-.02.06a8 8 0 0 1-7.75 6h-20a8 8 0 0 1-7.74-6l-.02-.06a5 5 0 0 1-2.24-8.94v-6.76l-.79-1.58-.44-.9.9-.44.63-.32H240a23.01 23.01 0 0 1 44.37-2zm-36.82 2a1 1 0 0 0-.44.1l-3.1 1.56.89 1.79 1.31-.66a3 3 0 0 1 2.69 0l2.2 1.1a1 1 0 0 0 .9 0l2.21-1.1a3 3 0 0 1 2.69 0l2.2 1.1a1 1 0 0 0 .9 0l2.21-1.1a3 3 0 0 1 2.69 0l2.2 1.1a1 1 0 0 0 .86.02l2.88-1.27a3 3 0 0 1 2.43 0l2.88 1.27a1 1 0 0 0 .85-.02l3.1-1.55-.89-1.79-1.42.71a3 3 0 0 1-2.56.06l-2.77-1.23a1 1 0 0 0-.4-.09h-.01a1 1 0 0 0-.4.09l-2.78 1.23a3 3 0 0 1-2.56-.06l-2.3-1.15a1 1 0 0 0-.45-.11h-.01a1 1 0 0 0-.44.1l-2.21 1.11a3 3 0 0 1-2.69 0l-2.2-1.1a1 1 0 0 0-.45-.11h-.01a1 1 0 0 0-.44.1l-2.21 1.11a3 3 0 0 1-2.69 0l-2.2-1.1a1 1 0 0 0-.45-.11h-.01zm0-2h-4.9a21.01 21.01 0 0 1 39.61 0h-2.09l-.06-.13-.26.13h-32.31zm30.35 7.68l1.36-.68h1.3v2h-36v-1.15l.34-.17 1.36-.68h2.59l1.36.68a3 3 0 0 0 2.69 0l1.36-.68h2.59l1.36.68a3 3 0 0 0 2.69 0l1.36-.68h2.59l1.36.68a3 3 0 0 0 2.56.06l1.67-.74h3.23l1.67.74a3 3 0 0 0 2.56-.06zM246.18 27l16.37 4.91L278.93 27h-32.75zm-.63 2h.34l16.66 5 16.67-5h.33a3 3 0 1 1 0 6h-34a3 3 0 1 1 0-6zm1.35 8a6 6 0 0 0 5.65 4h20a6 6 0 0 0 5.66-4H246.9z'/%3E%3Cpath d='M159.5 21.02A9 9 0 0 0 151 15h-42a9 9 0 0 0-8.5 6.02 6 6 0 0 0 .02 11.96A8.99 8.99 0 0 0 109 45h42a9 9 0 0 0 8.48-12.02 6 6 0 0 0 .02-11.96zM151 17h-42a7 7 0 0 0-6.33 4h54.66a7 7 0 0 0-6.33-4zm-9.34 26a8.98 8.98 0 0 0 3.34-7h-2a7 7 0 0 1-7 7h-4.34a8.98 8.98 0 0 0 3.34-7h-2a7 7 0 0 1-7 7h-4.34a8.98 8.98 0 0 0 3.34-7h-2a7 7 0 0 1-7 7h-7a7 7 0 1 1 0-14h42a7 7 0 1 1 0 14h-9.34zM109 27a9 9 0 0 0-7.48 4H101a4 4 0 1 1 0-8h58a4 4 0 0 1 0 8h-.52a9 9 0 0 0-7.48-4h-42z'/%3E%3Cpath d='M39 115a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm6-8a6 6 0 1 1-12 0 6 6 0 0 1 12 0zm-3-29v-2h8v-6H40a4 4 0 0 0-4 4v10H22l-1.33 4-.67 2h2.19L26 130h26l3.81-40H58l-.67-2L56 84H42v-6zm-4-4v10h2V74h8v-2h-8a2 2 0 0 0-2 2zm2 12h14.56l.67 2H22.77l.67-2H40zm13.8 4H24.2l3.62 38h22.36l3.62-38z'/%3E%3Cpath d='M129 92h-6v4h-6v4h-6v14h-3l.24 2 3.76 32h36l3.76-32 .24-2h-3v-14h-6v-4h-6v-4h-8zm18 22v-12h-4v4h3v8h1zm-3 0v-6h-4v6h4zm-6 6v-16h-4v19.17c1.6-.7 2.97-1.8 4-3.17zm-6 3.8V100h-4v23.8a10.04 10.04 0 0 0 4 0zm-6-.63V104h-4v16a10.04 10.04 0 0 0 4 3.17zm-6-9.17v-6h-4v6h4zm-6 0v-8h3v-4h-4v12h1zm27-12v-4h-4v4h3v4h1v-4zm-6 0v-8h-4v4h3v4h1zm-6-4v-4h-4v8h1v-4h3zm-6 4v-4h-4v8h1v-4h3zm7 24a12 12 0 0 0 11.83-10h7.92l-3.53 30h-32.44l-3.53-30h7.92A12 12 0 0 0 130 126z'/%3E%3Cpath d='M212 86v2h-4v-2h4zm4 0h-2v2h2v-2zm-20 0v.1a5 5 0 0 0-.56 9.65l.06.25 1.12 4.48a2 2 0 0 0 1.94 1.52h.01l7.02 24.55a2 2 0 0 0 1.92 1.45h4.98a2 2 0 0 0 1.92-1.45l7.02-24.55a2 2 0 0 0 1.95-1.52L224.5 96l.06-.25a5 5 0 0 0-.56-9.65V86a14 14 0 0 0-28 0zm4 0h6v2h-9a3 3 0 1 0 0 6H223a3 3 0 1 0 0-6H220v-2h2a12 12 0 1 0-24 0h2zm-1.44 14l-1-4h24.88l-1 4h-22.88zm8.95 26l-6.86-24h18.7l-6.86 24h-4.98zM150 242a22 22 0 1 0 0-44 22 22 0 0 0 0 44zm24-22a24 24 0 1 1-48 0 24 24 0 0 1 48 0zm-28.38 17.73l2.04-.87a6 6 0 0 1 4.68 0l2.04.87a2 2 0 0 0 2.5-.82l1.14-1.9a6 6 0 0 1 3.79-2.75l2.15-.5a2 2 0 0 0 1.54-2.12l-.19-2.2a6 6 0 0 1 1.45-4.46l1.45-1.67a2 2 0 0 0 0-2.62l-1.45-1.67a6 6 0 0 1-1.45-4.46l.2-2.2a2 2 0 0 0-1.55-2.13l-2.15-.5a6 6 0 0 1-3.8-2.75l-1.13-1.9a2 2 0 0 0-2.5-.8l-2.04.86a6 6 0 0 1-4.68 0l-2.04-.87a2 2 0 0 0-2.5.82l-1.14 1.9a6 6 0 0 1-3.79 2.75l-2.15.5a2 2 0 0 0-1.54 2.12l.19 2.2a6 6 0 0 1-1.45 4.46l-1.45 1.67a2 2 0 0 0 0 2.62l1.45 1.67a6 6 0 0 1 1.45 4.46l-.2 2.2a2 2 0 0 0 1.55 2.13l2.15.5a6 6 0 0 1 3.8 2.75l1.13 1.9a2 2 0 0 0 2.5.8zm2.82.97a4 4 0 0 1 3.12 0l2.04.87a4 4 0 0 0 4.99-1.62l1.14-1.9a4 4 0 0 1 2.53-1.84l2.15-.5a4 4 0 0 0 3.09-4.24l-.2-2.2a4 4 0 0 1 .97-2.98l1.45-1.67a4 4 0 0 0 0-5.24l-1.45-1.67a4 4 0 0 1-.97-2.97l.2-2.2a4 4 0 0 0-3.09-4.25l-2.15-.5a4 4 0 0 1-2.53-1.84l-1.14-1.9a4 4 0 0 0-5-1.62l-2.03.87a4 4 0 0 1-3.12 0l-2.04-.87a4 4 0 0 0-4.99 1.62l-1.14 1.9a4 4 0 0 1-2.53 1.84l-2.15.5a4 4 0 0 0-3.09 4.24l.2 2.2a4 4 0 0 1-.97 2.98l-1.45 1.67a4 4 0 0 0 0 5.24l1.45 1.67a4 4 0 0 1 .97 2.97l-.2 2.2a4 4 0 0 0 3.09 4.25l2.15.5a4 4 0 0 1 2.53 1.84l1.14 1.9a4 4 0 0 0 5 1.62l2.03-.87zM152 207a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm6 2a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm-11 1a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm-6 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm3-5a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm-8 8a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm3 6a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm0 6a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm4 7a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm5-2a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm5 4a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm4-6a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm6-4a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm-4-3a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm4-3a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm-5-4a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm-24 6a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm16 5a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm7-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0zm86-29a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2h-2zm19 9a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2h-2a1 1 0 0 1-1-1zm-14 5a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2h-2zm-25 1a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2h-2zm5 4a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2h-2zm9 0a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2h-2a1 1 0 0 1-1-1zm15 1a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2h-2a1 1 0 0 1-1-1zm12-2a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2h-2zm-11-14a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2h-2a1 1 0 0 1-1-1zm-19 0a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2h-2zm6 5a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2h-2a1 1 0 0 1-1-1zm-25 15c0-.47.01-.94.03-1.4a5 5 0 0 1-1.7-8 3.99 3.99 0 0 1 1.88-5.18 5 5 0 0 1 3.4-6.22 3 3 0 0 1 1.46-1.05 5 5 0 0 1 7.76-3.27A30.86 30.86 0 0 1 246 184c6.79 0 13.06 2.18 18.17 5.88a5 5 0 0 1 7.76 3.27 3 3 0 0 1 1.47 1.05 5 5 0 0 1 3.4 6.22 4 4 0 0 1 1.87 5.18 4.98 4.98 0 0 1-1.7 8c.02.46.03.93.03 1.4v1h-62v-1zm.83-7.17a30.9 30.9 0 0 0-.62 3.57 3 3 0 0 1-.61-4.2c.37.28.78.49 1.23.63zm1.49-4.61c-.36.87-.68 1.76-.96 2.68a2 2 0 0 1-.21-3.71c.33.4.73.75 1.17 1.03zm2.32-4.54c-.54.86-1.03 1.76-1.49 2.68a3 3 0 0 1-.07-4.67 3 3 0 0 0 1.56 1.99zm1.14-1.7c.35-.5.72-.98 1.1-1.46a1 1 0 1 0-1.1 1.45zm5.34-5.77c-1.03.86-2 1.79-2.9 2.77a3 3 0 0 0-1.11-.77 3 3 0 0 1 4-2zm42.66 2.77c-.9-.98-1.87-1.9-2.9-2.77a3 3 0 0 1 4.01 2 3 3 0 0 0-1.1.77zm1.34 1.54c.38.48.75.96 1.1 1.45a1 1 0 1 0-1.1-1.45zm3.73 5.84c-.46-.92-.95-1.82-1.5-2.68a3 3 0 0 0 1.57-1.99 3 3 0 0 1-.07 4.67zm1.8 4.53c-.29-.9-.6-1.8-.97-2.67.44-.28.84-.63 1.17-1.03a2 2 0 0 1-.2 3.7zm1.14 5.51c-.14-1.21-.35-2.4-.62-3.57.45-.14.86-.35 1.23-.63a2.99 2.99 0 0 1-.6 4.2zM275 214a29 29 0 0 0-57.97 0h57.96zM72.33 198.12c-.21-.32-.34-.7-.34-1.12v-12h-2v12a4.01 4.01 0 0 0 7.09 2.54c.57-.69.91-1.57.91-2.54v-12h-2v12a1.99 1.99 0 0 1-2 2 2 2 0 0 1-1.66-.88zM75 176c.38 0 .74-.04 1.1-.12a4 4 0 0 0 6.19 2.4A13.94 13.94 0 0 1 84 185v24a6 6 0 0 1-6 6h-3v9a5 5 0 1 1-10 0v-9h-3a6 6 0 0 1-6-6v-24a14 14 0 0 1 14-14 5 5 0 0 0 5 5zm-17 15v12a1.99 1.99 0 0 0 1.22 1.84 2 2 0 0 0 2.44-.72c.21-.32.34-.7.34-1.12v-12h2v12a3.98 3.98 0 0 1-5.35 3.77 3.98 3.98 0 0 1-.65-.3V209a4 4 0 0 0 4 4h16a4 4 0 0 0 4-4v-24c.01-1.53-.23-2.88-.72-4.17-.43.1-.87.16-1.28.17a6 6 0 0 1-5.2-3 7 7 0 0 1-6.47-4.88A12 12 0 0 0 58 185v6zm9 24v9a3 3 0 1 0 6 0v-9h-6z'/%3E%3Cpath d='M-17 191a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2h-2zm19 9a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2H3a1 1 0 0 1-1-1zm-14 5a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2h-2zm-25 1a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2h-2zm5 4a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2h-2zm9 0a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2h-2a1 1 0 0 1-1-1zm15 1a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2h-2a1 1 0 0 1-1-1zm12-2a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2H4zm-11-14a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2h-2a1 1 0 0 1-1-1zm-19 0a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2h-2zm6 5a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2h-2a1 1 0 0 1-1-1zm-25 15c0-.47.01-.94.03-1.4a5 5 0 0 1-1.7-8 3.99 3.99 0 0 1 1.88-5.18 5 5 0 0 1 3.4-6.22 3 3 0 0 1 1.46-1.05 5 5 0 0 1 7.76-3.27A30.86 30.86 0 0 1-14 184c6.79 0 13.06 2.18 18.17 5.88a5 5 0 0 1 7.76 3.27 3 3 0 0 1 1.47 1.05 5 5 0 0 1 3.4 6.22 4 4 0 0 1 1.87 5.18 4.98 4.98 0 0 1-1.7 8c.02.46.03.93.03 1.4v1h-62v-1zm.83-7.17a30.9 30.9 0 0 0-.62 3.57 3 3 0 0 1-.61-4.2c.37.28.78.49 1.23.63zm1.49-4.61c-.36.87-.68 1.76-.96 2.68a2 2 0 0 1-.21-3.71c.33.4.73.75 1.17 1.03zm2.32-4.54c-.54.86-1.03 1.76-1.49 2.68a3 3 0 0 1-.07-4.67 3 3 0 0 0 1.56 1.99zm1.14-1.7c.35-.5.72-.98 1.1-1.46a1 1 0 1 0-1.1 1.45zm5.34-5.77c-1.03.86-2 1.79-2.9 2.77a3 3 0 0 0-1.11-.77 3 3 0 0 1 4-2zm42.66 2.77c-.9-.98-1.87-1.9-2.9-2.77a3 3 0 0 1 4.01 2 3 3 0 0 0-1.1.77zm1.34 1.54c.38.48.75.96 1.1 1.45a1 1 0 1 0-1.1-1.45zm3.73 5.84c-.46-.92-.95-1.82-1.5-2.68a3 3 0 0 0 1.57-1.99 3 3 0 0 1-.07 4.67zm1.8 4.53c-.29-.9-.6-1.8-.97-2.67.44-.28.84-.63 1.17-1.03a2 2 0 0 1-.2 3.7zm1.14 5.51c-.14-1.21-.35-2.4-.62-3.57.45-.14.86-.35 1.23-.63a2.99 2.99 0 0 1-.6 4.2zM15 214a29 29 0 0 0-57.97 0h57.96z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
+/* .msger-chat background image is removed here as it's part of the variable section now */
+/* If the SVG background is essential for dark mode, it needs a dark mode version or careful CSS handling */
 
 /*CLOSE BUTTON*/
 .alert-dismissible .close {
   position: relative;
   top: -2px;
   right: -21px;
-  color: rgb(0, 0, 0);
+  color: var(--text-color); /* MODIFIED - Close button color */
 }
 
-.alert-success {
-  color: #fbfffb;
-  background-color: #4ee218;
-  border-color: #f3faee;
+.alert-success { /* Second definition of .alert-success */
+  color: var(--button-text-color); /* MODIFIED */
+  background-color: var(--alert-success-bg); /* MODIFIED */
+  /* border-color: var(--border); */ /* MODIFIED or remove */
 }
 
-.alert {
+.alert { /* Second definition of .alert */
   position: fixed;
   top: 48px;
   left: 50%;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
   z-index: 9999;
-  color: #fff;
+  color: var(--button-text-color); /* MODIFIED */
   font-size: 1.5rem;
   font-weight: 400;
   text-align: center;
@@ -549,4 +844,5 @@ html, body, div, p, ul, li,h1 {
   padding: 1.4rem 5rem;
   -webkit-box-shadow: 0 2rem 4rem rgb(0 0 0 / 25%);
   box-shadow: 0 2rem 4rem rgb(0 0 0 / 25%);
+  /* background-color: var(--card-bg); */ /* Example for generic alert background */
 }

@@ -62,3 +62,33 @@ var createCheckoutSession = function(priceId) {
         });
       });
   });
+
+// Theme Switcher Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const themeSwitcherBtn = document.getElementById('theme-switcher-btn');
+    const body = document.body;
+    const themeKey = 'themePreference';
+
+    // 1. Apply saved theme on page load
+    const savedTheme = localStorage.getItem(themeKey);
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-mode');
+    } else if (savedTheme === 'light') {
+        body.classList.remove('dark-mode');
+    }
+    // If savedTheme is null, the CSS @media (prefers-color-scheme: dark) will take effect.
+
+    // 2. Add event listener to the button
+    if (themeSwitcherBtn) {
+        themeSwitcherBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+
+            // 3. Save current theme preference
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem(themeKey, 'dark');
+            } else {
+                localStorage.setItem(themeKey, 'light');
+            }
+        });
+    }
+});
